@@ -17,12 +17,18 @@ class Word {
                 "./div/*[contains(concat(' ', normalize-space(@class), ' '),
                 ' hw ')]",
                 $entry);
-            $word = new Word();
-            $word->id = $entry->attributes->getNamedItem("id")->nodeValue;   
-            $word->gyy = $gyy->item(0)->nodeValue;
+            $word = new Word(
+                $entry->attributes->getNamedItem("id")->nodeValue,   
+                $gyy->item(0)->nodeValue
+                );
             array_push($result, $word);
         }
         return $result;
+    }
+
+    public function __construct(string $id, string $gyy) {
+        $this->id = $id;
+        $this->gyy = $gyy;
     }
 
     public function __toString(): string {
