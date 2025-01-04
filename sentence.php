@@ -2,6 +2,7 @@
 
 class Sentence {
     public string $gyy;
+    public array $split;
     public static function readHtml($filename) {
         $testdata = file_get_contents($filename);
         $DOM = new DOMDocument;
@@ -20,6 +21,8 @@ class Sentence {
 
     public function __construct(string $gyy) {
         $this->gyy = $gyy;
+        $clean = $result = preg_replace("/[^a-zA-Z\s]+/", "", $gyy);
+        $this->split = preg_split("/\s+/", $clean, 10);
     }
 
     public function __toString(): string {

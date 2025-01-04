@@ -1,8 +1,9 @@
 <?php
 
-class Word {
-    public string $id;
-    public string $gyy;
+require_once(dirname(__FILE__) ."/DictionaryWord.php");
+
+class Dictionary {
+    public array $words;
     public static function readHtml($filename) {
         $dictionarywords = file_get_contents($filename);
         $DOM = new DOMDocument;
@@ -17,21 +18,20 @@ class Word {
                 "./div/*[contains(concat(' ', normalize-space(@class), ' '),
                 ' hw ')]",
                 $entry);
-            $word = new Word(
+            $word = new DictionaryWord(
                 $entry->attributes->getNamedItem("id")->nodeValue,   
                 $gyy->item(0)->nodeValue
                 );
             array_push($result, $word);
         }
-        return $result;
+        return new Dictionary($result);
     }
 
-    public function __construct(string $id, string $gyy) {
-        $this->id = $id;
-        $this->gyy = $gyy;
+    public function __construct(array $words) {
+        $this->words = $words;
     }
 
     public function __toString(): string {
-        return "{$this->id} {$this->gyy}";
+        return "{$this->words[0]}...";
     }
 }
