@@ -20,4 +20,10 @@ class AllMatchesForWord {
     public function __toString(): string {
         return "{$this->gyy}+{$this->matches[0]}...";
     }
+
+    public function print() {
+        for ($ii = 0; $ii < 5 && $ii < count($this->matches); $ii++) {
+            echo $this->matches[$ii] ."\r\n";
+        }
+    }
 }

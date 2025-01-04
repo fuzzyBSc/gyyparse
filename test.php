@@ -10,6 +10,7 @@ $dictionary = Dictionary::readHtml("Gaman guladha Gamilaraay, Yuwaalaraay, Yuwaa
 $sentences = Sentence::readHtml("Sentences.html");
 
 $sentence = $sentences[0];
-$word = $sentence->split[0];
-$allMatches = new AllMatchesForWord($word, $dictionary);
-var_dump($allMatches->matches[0]);
+foreach ($sentence->split as $word) {
+    $allMatches = new AllMatchesForWord($word, $dictionary);
+    $allMatches->print();
+}
