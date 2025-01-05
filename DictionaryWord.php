@@ -4,10 +4,15 @@ class DictionaryWord {
     public string $id;
     public string $gyy;
     public string $clean;
-    public function __construct(string $id, string $gyy) {
+
+    public string $type;
+    public function __construct(string $id, string $gyy, string $type) {
         $this->id = $id;
         $this->gyy = $gyy;
-        $this->clean = strtolower($gyy);
+        $clean = strtolower($gyy);
+        $clean = preg_replace("/[^a-z]/","", $clean);
+        $this->clean = strtolower($clean);
+        $this->type = $type;
     }
 
     public function __toString(): string {
