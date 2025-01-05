@@ -1,10 +1,11 @@
 <?php
 
 require_once dirname(__FILE__) ."/DictionaryWord.php";
+require_once dirname(__FILE__) ."/Suffixes.php";
 
 class Dictionary {
     public array $words;
-    public array $suffixes;
+    public Suffixes $suffixes;
 
     public static function readHtmlFile($filename) {
         $dictionarywords = file_get_contents($filename);
@@ -35,13 +36,10 @@ class Dictionary {
                 );
             array_push($words, $word);
         }
-        $suffixes = array_filter($words, function($word) {
-            return $word->type == "suff";
-        });
-        return new Dictionary($words, $suffixes);
+        return new Dictionary($words, new Suffixes($words));
     }
 
-    public function __construct(array $words, array $suffixes) {
+    public function __construct(array $words, Suffixes $suffixes) {
         $this->words = $words;
         $this->suffixes = $suffixes;
     }

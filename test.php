@@ -14,4 +14,5 @@ foreach ($sentence->split as $word) {
     $allMatches = new AllMatchesForWord($word, $dictionary);
     $allMatches->print();
 }
-var_dump($dictionary->suffixes);
+// var_dump($dictionary->suffixes);
+var_dump($dictionary->suffixes->strip("gaaybaraay"));
