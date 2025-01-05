@@ -4,11 +4,16 @@ require_once(dirname(__FILE__) ."/DictionaryWord.php");
 
 class Dictionary {
     public array $words;
-    public static function readHtml($filename) {
+
+    public static function readHtmlFile($filename) {
         $dictionarywords = file_get_contents($filename);
         $DOM = new DOMDocument;
         $DOM->loadHTML(source: $dictionarywords);
         
+        return Dictionary::readHtmlDom($DOM);
+    }
+
+    public static function readHtmlDom($DOM) {
         $finder = new DomXPath($DOM);
         $entries = $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' entry ')]");
         

@@ -3,11 +3,16 @@
 class Sentence {
     public string $gyy;
     public array $split;
-    public static function readHtml($filename) {
+
+    public static function readHtmlFile($filename) {
         $testdata = file_get_contents($filename);
         $DOM = new DOMDocument;
         $DOM->loadHTML(source: $testdata);
         
+        return Sentence::readHtmlDom($DOM);
+    }
+
+    public static function readHtmlDom($DOM) {
         $finder = new DomXPath($DOM);
         $nodes = $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' orth ')]");
         
