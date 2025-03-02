@@ -13,6 +13,10 @@ class AttemptedWordMatch {
         $this->score = levenshtein(strtolower($gyy), $match->clean);
     }
 
+    public function getDictionaryWord(): DictionaryWord {
+        return $this->match;
+    }
+
     public static function cmp(AttemptedWordMatch $a, AttemptedWordMatch $b): int {
         return $a->score <=> $b->score;
     }

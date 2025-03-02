@@ -20,12 +20,12 @@ class DictionaryWord {
         // Strip final suffix from word, eg stripping verbs down to their root
         $clean = preg_replace("/-[^-]*$/","", $clean);
         // Remove any remaining formatting
-        $clean = preg_replace("/[^a-z]/","", $clean);
+        $clean = preg_replace("/[^a-zA-Z]/","", $clean);
         $this->clean = strtolower($clean);
         $this->type = $type;
     }
 
     public function __toString(): string {
-        return "{$this->id} {$this->gyy}";
+        return "{$this->id}:{$this->gyy}";
     }
 }

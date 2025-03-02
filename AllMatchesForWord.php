@@ -17,6 +17,10 @@ class AllMatchesForWord {
         usort($this->matches, 'AttemptedWordMatch::cmp');
     }
 
+    public function bestMatch(): AttemptedWordMatch {
+        return $this->matches[0];
+    }
+
     public function __toString(): string {
         return "{$this->gyy}+{$this->matches[0]}...";
     }
