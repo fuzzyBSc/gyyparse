@@ -3,7 +3,7 @@
 require_once dirname(__FILE__) ."/Dictionary.php";
 require_once dirname(__FILE__) ."/AttemptedCompoundWordMatch.php";
 
-class SuffixedWordMatch {
+class CompoundWordMatch {
     public string $gyy;
     public array $matches;
 
@@ -14,17 +14,16 @@ class SuffixedWordMatch {
         foreach ($wordBreakdowns as $breakdown) {
             $attemptedMatches = [];
             foreach ($breakdown as $component) {
-                var_dump($breakdown);
+                // var_dump($breakdown);
                 $attemptedMatch = new AllMatchesForWord($component, $dictionary);
                 $attemptedMatches[] = $attemptedMatch->bestMatch();
             }
-            $attemptedMatch = new AttemptedCompoundWordMatch($gyy, $attemptedMatches);
-            $this->matches[] = $attemptedMatch;
+            $this->matches[] = new AttemptedCompoundWordMatch($gyy, $attemptedMatches);
         }
         usort($this->matches, 'AttemptedCompoundWordMatch::cmp');
     }
 
-    public function bestMatch(): AttemptedWordMatch {
+    public function bestMatch(): AttemptedCompoundWordMatch {
         return $this->matches[0];
     }
 

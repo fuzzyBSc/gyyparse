@@ -30,9 +30,13 @@ class AttemptedCompoundWordMatch {
         $sep = "";
         foreach ($this->matches as $match) {
             $dictionaryWord = $match->match;
-            $matches .= $sep . $dictionaryWord->id . "." . $dictionaryWord->clean;
+            $matches .= "{$sep}{$dictionaryWord->id}.{$dictionaryWord->clean}";
             $sep = "-";
         }
         return "{$this->gyy}:{$matches}={$this->score}";
+    }
+
+    public function print() {
+        echo $this->__toString();
     }
 }
