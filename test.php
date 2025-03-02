@@ -2,6 +2,7 @@
 require_once dirname(__FILE__) ."/Dictionary.php";
 require_once dirname(__FILE__) ."/Sentence.php";
 require_once dirname(__FILE__) ."/SentenceMatch.php";
+require_once dirname(__FILE__) ."/SuffixedWordMatch.php";
 require_once dirname(__FILE__) ."/AllMatchesForWord.php";
 
 libxml_use_internal_errors(true);
@@ -18,5 +19,8 @@ $sentences = Sentence::readHtmlFile("Sentences.html");
 // var_dump($dictionary->suffixes);
 // var_dump($dictionary->suffixes->strip("gaaybaraay"));
 
-$match = new SentenceMatch("Waal ngiyama nguu dhaldanhi, garigari ngaama baadjindi.", $dictionary);
+// $match = new SentenceMatch("Waal ngiyama nguu dhaldanhi, garigari ngaama baadjindi.", $dictionary);
+// $match->print();
+
+$match = new SuffixedWordMatch("dhaldanhi", $dictionary);
 $match->print();
